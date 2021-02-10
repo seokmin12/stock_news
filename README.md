@@ -1,5 +1,5 @@
 # 주식 뉴스 크롤링 사이트
-* ## This web service was made for people who starts stock recently.
+* ## This web service was made for people who start stock recently.
 
 * ## This site crawls the issue news posted on the internet **every minute**, stores it in **DB**, and shows it to clients. 
 ___
