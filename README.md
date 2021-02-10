@@ -5,7 +5,7 @@
 ___
 <br>
 
-### To crawl the news using news.js, insert your mysql password, DB name and port number. Like this...
+### To crawl the news using `news.js`, insert your mysql password, DB name and port number. Like this...
 ```js
 var connection = mysql.createConnection({
     host: '127.0.0.1',
