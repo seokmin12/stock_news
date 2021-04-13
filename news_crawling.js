@@ -59,54 +59,13 @@ function crawling() {
 
                     var contents = [title, href, date];
 
-                    'use strict';
-
-                    // analze sentiment
-                    async function quickstart() {
-                        const language = require('@google-cloud/language');
-
-                        const client = new language.LanguageServiceClient();
-                        
-                        const final_result = contents;
-                        const text = title;
-                        
-                        const document = {
-                            content: text,
-                            type: 'PLAIN_TEXT',
-                        };
-
-                        const [result] = await client.analyzeSentiment({
-                            document: document
-                        });
-                        const sentiment = result.documentSentiment;
-
-                        // 점수 보기
-
-                        // console.log(`Text: ${text}`);
-                        // console.log(`Sentiment score: ${sentiment.score}`);
-                        // console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
-
-                        function check() {
-                            if (sentiment.score >= 0) {
-                                return final_result;
-                            } else {
-                                return false;
-                            }
+                    connection.query(sql, contents, function (errs, results, fields) {
+                        if (errs) {
+                            console.log(errs);
+                        } else {
+                            console.log("DB에 저장완료");
                         }
-                        const check_score = check()
-                        // console.log(check_score)  //리턴된 값 확인
-                        // console.log('-------------------------------')
-                        connection.query(sql, check_score, function (errs, results, fields) {
-                            if (errs) {
-                                console.log(errs);
-                            } else {
-                                console.log("DB에 저장완료");
-                            }
-                        })
-                    }
-                    // [END language_quickstart]
-
-                    quickstart().catch(console.error);
+                    })
                 }
             });
         }
